@@ -1,0 +1,4 @@
+{
+  "port": 5050,
+  "mongoURL": "mongodb+srv://alexander:1234@cluster0.umbka.mongodb.net/app?retryWrites=true&w=majority"
+}
