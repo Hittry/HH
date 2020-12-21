@@ -1,8 +1,8 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useHttp} from "../hooks/http.hook";
 import {useMessage} from "../hooks/msg.hook";
 
-export const InfoPage = () => {
+export const ReformateCompanyDescr = () => {
     const {loading, error, request, clearError, result} = useHttp()
     const msg = useMessage()
     useEffect(() =>{
@@ -14,7 +14,7 @@ export const InfoPage = () => {
         window.M.updateTextFields()
     }, [])
     const [form, setForm] = useState(
-        {username: '',prof: '',exp: '', phone: '', education: ''}
+        {compname: '', phone: '', location: ''}
     )
     const changeHead = event =>{
         setForm({...form, [event.target.name]: event.target.value})
@@ -22,7 +22,7 @@ export const InfoPage = () => {
 
     const registerHead = async () => {
         try{
-            await request('/api/descr/info', 'POST', {...form})
+            await request('/api/comp/infoCompany', 'POST', {...form})
         } catch (e) {
         }
     }
@@ -33,36 +33,14 @@ export const InfoPage = () => {
             <div className="col s8 offset-s2">
                 <div className="input-field">
                     <input
-                        placeholder="Введите имя пользователя"
-                        id="username"
+                        placeholder="Введите имя своей компании"
+                        id="compname"
                         type="text"
-                        name="username"
-                        value={form.username}
+                        name="compname"
+                        value={form.compname}
                         onChange={changeHead}
                     />
-                    <label htmlFor="username">Введите имя пользователя</label>
-                </div>
-                <div className="input-field">
-                    <input
-                        placeholder="Введите род деятельности"
-                        id="prof"
-                        type="text"
-                        name="prof"
-                        value={form.prof}
-                        onChange={changeHead}
-                    />
-                    <label htmlFor="prof">Введите профессию</label>
-                </div>
-                <div className="input-field">
-                    <input
-                        placeholder="Введите описание"
-                        id="exp"
-                        type="text"
-                        name="exp"
-                        value={form.exp}
-                        onChange={changeHead}
-                    />
-                    <label htmlFor="exp">Введите описание</label>
+                    <label htmlFor="compname">Введите имя своей компании</label>
                 </div>
                 <div className="input-field">
                     <input
@@ -77,14 +55,14 @@ export const InfoPage = () => {
                 </div>
                 <div className="input-field">
                     <input
-                        placeholder="Введите образование"
-                        id="education"
+                        placeholder="Введите место расположения"
+                        id="location"
                         type="text"
-                        name="education"
-                        value={form.education}
+                        name="location"
+                        value={form.location}
                         onChange={changeHead}
                     />
-                    <label htmlFor="education">Введите образование</label>
+                    <label htmlFor="location">Введите место расположения</label>
                 </div>
                 <div className="card-action">
                     <button
@@ -92,7 +70,7 @@ export const InfoPage = () => {
                         onClick={registerHead}
                         disabled={loading}
                     >
-                        Enter
+                        Изменить данные
                     </button>
                 </div>
             </div>

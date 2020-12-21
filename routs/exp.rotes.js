@@ -69,15 +69,14 @@ router.post(
 
     async (req, res) =>{
         try{
-            const {username ,prof, rate, exp, phone, education} = req.body
+            const {username ,prof, exp, phone, education} = req.body
 
             const vac = await Vac.findOne({ username })
             if (!vac) {
                 return res.status(400).json({message: 'Сначала ввидите изначальные данные'})
             }
-            vac.username = username
+
             vac.prof = prof
-            vac.rate = rate
             vac.exp = exp
             vac.phone = phone
             vac.education = education
@@ -88,6 +87,28 @@ router.post(
 
         } catch (e) {
             res.status(500).json({message: "Что-то с сервером"})
+        }
+
+    })
+
+router.post(
+    '/deleteVac',
+
+    async (req, res) =>{
+        try{
+            const {username} = req.body
+
+            const your_vac_for_delete = await Vac.findOne({ username })
+            if (!your_vac_for_delete) {
+                return res.status(400).json({message: 'Такой вакансии нет'})
+            }
+
+            await your_vac_for_delete.delete()
+
+            res.status(201).json({message: "Ваше объявление удалено"})
+
+        } catch (e) {
+            res.status(500).json({message: "что-то с сервером"})
         }
 
     })

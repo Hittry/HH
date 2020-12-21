@@ -1,7 +1,6 @@
-import React, {useState,useCallback,useContext, useEffect} from 'react'
+import React, {useState,useCallback, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import {useHttp} from "../hooks/http.hook";
-import {AuthContext} from "../context/AuthContext";
 import {State} from "../components/State";
 import {NewLoader} from "../components/NewLoader";
 export const ChooseProf = () => {
